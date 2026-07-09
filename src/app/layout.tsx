@@ -15,7 +15,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "아이밥 - 이유식 레시피 추천",
-  description: "냉장고 식재료로 아이 월령에 맞는 이유식·유아식 레시피를 추천해드려요",
+  description:
+    "냉장고 식재료로 아이 월령에 맞는 이유식·유아식 레시피를 추천해드려요",
 };
 
 export default function RootLayout({
@@ -25,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

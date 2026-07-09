@@ -1,14 +1,21 @@
-import Link from 'next/link'
-import { login } from '@/lib/actions/auth'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import Link from "next/link";
+import { login } from "@/lib/actions/auth";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams: { error?: string; message?: string }
+  searchParams: { error?: string; message?: string };
 }) {
   return (
     <Card className="w-full max-w-sm">
@@ -44,17 +51,23 @@ export default function LoginPage({
           {searchParams.message && (
             <p className="text-sm text-green-600">{searchParams.message}</p>
           )}
-          <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
+          <Button
+            type="submit"
+            className="w-full bg-orange-500 hover:bg-orange-600"
+          >
             로그인
           </Button>
         </form>
       </CardContent>
       <CardFooter className="justify-center text-sm text-muted-foreground">
         아직 계정이 없으신가요?&nbsp;
-        <Link href="/signup" className="text-orange-500 hover:underline font-medium">
+        <Link
+          href="/signup"
+          className="text-orange-500 hover:underline font-medium"
+        >
           회원가입
         </Link>
       </CardFooter>
     </Card>
-  )
+  );
 }

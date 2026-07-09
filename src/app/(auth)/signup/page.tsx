@@ -1,20 +1,29 @@
-import Link from 'next/link'
-import { signup } from '@/lib/actions/auth'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import Link from "next/link";
+import { signup } from "@/lib/actions/auth";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function SignupPage({
   searchParams,
 }: {
-  searchParams: { error?: string }
+  searchParams: { error?: string };
 }) {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">🍚 아이밥</CardTitle>
-        <CardDescription>이유식 레시피 추천 서비스에 오신 걸 환영해요</CardDescription>
+        <CardDescription>
+          이유식 레시피 추천 서비스에 오신 걸 환영해요
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form action={signup} className="space-y-4">
@@ -42,17 +51,23 @@ export default function SignupPage({
           {searchParams.error && (
             <p className="text-sm text-red-500">{searchParams.error}</p>
           )}
-          <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
+          <Button
+            type="submit"
+            className="w-full bg-orange-500 hover:bg-orange-600"
+          >
             회원가입
           </Button>
         </form>
       </CardContent>
       <CardFooter className="justify-center text-sm text-muted-foreground">
         이미 계정이 있으신가요?&nbsp;
-        <Link href="/login" className="text-orange-500 hover:underline font-medium">
+        <Link
+          href="/login"
+          className="text-orange-500 hover:underline font-medium"
+        >
           로그인
         </Link>
       </CardFooter>
     </Card>
-  )
+  );
 }
