@@ -1,3 +1,3 @@
 export default function RecipesPage() {
-  return <div>Recipes</div>
+  return <div>Recipes</div>;
 }

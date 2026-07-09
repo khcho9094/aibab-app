@@ -1,3 +1,3 @@
 export default function IngredientsPage() {
-  return <div>Ingredients</div>
+  return <div>Ingredients</div>;
 }
