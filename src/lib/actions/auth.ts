@@ -24,9 +24,7 @@ export async function signup(formData: FormData) {
   if (error) {
     redirect(`/signup?error=${encodeURIComponent(error.message)}`);
   }
-  redirect(
-    "/login?message=가입 확인 이메일을 보냈어요. 이메일을 확인해주세요!",
-  );
+  redirect(`/login?message=${encodeURIComponent('가입 확인 이메일을 보냈어요. 이메일을 확인해주세요!')}`);
 }
 
 export async function logout() {
