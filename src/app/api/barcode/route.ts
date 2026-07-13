@@ -7,6 +7,10 @@ export async function GET(request: NextRequest) {
   if (!barcode) {
     return NextResponse.json({ error: '바코드가 없습니다' }, { status: 400 })
   }
+  // 바코드는 숫자만 허용 (EAN-8, EAN-13 등)
+  if (!/^\d{8,14}$/.test(barcode)) {
+    return NextResponse.json({ error: '유효하지 않은 바코드 형식입니다' }, { status: 400 })
+  }
 
   try {
     const apiKey = process.env.FOOD_SAFETY_API_KEY

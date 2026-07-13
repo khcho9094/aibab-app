@@ -7,8 +7,11 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = createClient();
-    await supabase.auth.exchangeCodeForSession(code);
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (!error) return NextResponse.redirect(`${origin}/dashboard`);
   }
 
-  return NextResponse.redirect(`${origin}/dashboard`);
+  return NextResponse.redirect(
+    `${origin}/login?error=${encodeURIComponent('인증에 실패했습니다. 다시 시도해주세요.')}`
+  );
 }

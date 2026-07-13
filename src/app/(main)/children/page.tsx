@@ -5,9 +5,13 @@ import { calcAgeMonths, formatAgeLabel } from '@/lib/utils/age'
 
 export default async function ChildrenPage() {
   const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return null
+
   const { data: children } = await supabase
     .from('children')
     .select('*')
+    .eq('user_id', user.id)
     .order('created_at', { ascending: true })
 
   return (

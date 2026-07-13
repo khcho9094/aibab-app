@@ -19,9 +19,13 @@ function getExpiryStatus(expiryDate: string | null) {
 
 export default async function IngredientsPage() {
   const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return null
+
   const { data: ingredients } = await supabase
     .from('ingredients')
     .select('*')
+    .eq('user_id', user.id)
     .order('is_favorite', { ascending: false })
     .order('expiry_date', { ascending: true, nullsFirst: false })
 

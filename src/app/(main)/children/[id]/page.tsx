@@ -17,11 +17,13 @@ export default async function ChildDetailPage({
   searchParams: { error?: string }
 }) {
   const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
 
   const { data: child } = await supabase
     .from('children')
     .select('*')
     .eq('id', params.id)
+    .eq('user_id', user?.id ?? '')
     .single()
 
   if (!child) notFound()

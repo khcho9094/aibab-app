@@ -51,7 +51,7 @@ export async function updateIngredient(id: string, formData: FormData) {
   const name = formData.get('name') as string
   const canonical_name = await resolveCanonicalName(name)
 
-  await supabase
+  const { error } = await supabase
     .from('ingredients')
     .update({
       name,
@@ -64,6 +64,7 @@ export async function updateIngredient(id: string, formData: FormData) {
     .eq('id', id)
     .eq('user_id', user.id)
 
+  if (error) redirect(`/ingredients?error=${encodeURIComponent(error.message)}`)
   revalidatePath('/ingredients')
   redirect('/ingredients')
 }

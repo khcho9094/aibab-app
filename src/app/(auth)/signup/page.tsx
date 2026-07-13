@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { signup } from "@/lib/actions/auth";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -11,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { SubmitButton } from "@/components/submit-button";
 
 export default function SignupPage({
   searchParams,
@@ -51,12 +51,12 @@ export default function SignupPage({
           {searchParams.error && (
             <p className="text-sm text-red-500">{searchParams.error}</p>
           )}
-          <Button
-            type="submit"
+          <SubmitButton
             className="w-full bg-orange-500 hover:bg-orange-600"
+            pendingText="가입 중..."
           >
             회원가입
-          </Button>
+          </SubmitButton>
         </form>
       </CardContent>
       <CardFooter className="justify-center text-sm text-muted-foreground">

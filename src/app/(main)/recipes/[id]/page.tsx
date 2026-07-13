@@ -78,7 +78,7 @@ export default async function RecipeDetailPage({
       <div className="bg-white rounded-xl border p-4">
         <h2 className="font-semibold mb-3">👩‍🍳 조리 방법</h2>
         <ol className="space-y-3">
-          {recipe.steps.map((step: string, i: number) => (
+          {(recipe.steps ?? []).map((step: string, i: number) => (
             <li key={i} className="flex gap-3 text-sm">
               <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center shrink-0 mt-0.5">
                 {i + 1}

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { createChild } from '@/lib/actions/children'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { SubmitButton } from '@/components/submit-button'
 
 export default function NewChildPage({
   searchParams,
@@ -38,9 +38,9 @@ export default function NewChildPage({
           <p className="text-sm text-red-500">{searchParams.error}</p>
         )}
 
-        <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
+        <SubmitButton className="w-full bg-orange-500 hover:bg-orange-600" pendingText="저장 중...">
           저장하기
-        </Button>
+        </SubmitButton>
       </form>
     </div>
   )

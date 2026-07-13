@@ -59,8 +59,17 @@ export async function deleteChild(id: string) {
 // ── 알레르기 ─────────────────────────────────────────
 
 export async function addAllergy(childId: string, formData: FormData) {
-  await getUser()
+  const user = await getUser()
   const supabase = createClient()
+
+  // childId 소유권 검증
+  const { data: child } = await supabase
+    .from('children')
+    .select('id')
+    .eq('id', childId)
+    .eq('user_id', user.id)
+    .single()
+  if (!child) redirect('/children')
 
   await supabase.from('child_allergies').insert({
     child_id: childId,
@@ -73,9 +82,22 @@ export async function addAllergy(childId: string, formData: FormData) {
 }
 
 export async function deleteAllergy(allergyId: string, childId: string) {
-  await getUser()
+  const user = await getUser()
   const supabase = createClient()
 
-  await supabase.from('child_allergies').delete().eq('id', allergyId)
+  // childId가 현재 user 소유인지 검증
+  const { data: child } = await supabase
+    .from('children')
+    .select('id')
+    .eq('id', childId)
+    .eq('user_id', user.id)
+    .single()
+  if (!child) return
+
+  await supabase
+    .from('child_allergies')
+    .delete()
+    .eq('id', allergyId)
+    .eq('child_id', childId)
   revalidatePath(`/children/${childId}`)
 }

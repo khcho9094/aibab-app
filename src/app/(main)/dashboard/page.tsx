@@ -12,25 +12,27 @@ function getDaysUntilExpiry(expiryDate: string) {
 export default async function DashboardPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return null
 
-  // 유통기한 3일 이내 식재료
+  // 유통기한 3일 이내 + 아이 목록 병렬 조회
   const threeDaysLater = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
     .toISOString().split('T')[0]
-  const { data: expiringItems } = await supabase
-    .from('ingredients')
-    .select('id, name, expiry_date')
-    .eq('user_id', user!.id)
-    .not('expiry_date', 'is', null)
-    .lte('expiry_date', threeDaysLater)
-    .order('expiry_date', { ascending: true })
-    .limit(5)
-
-  // 아이 목록
-  const { data: children } = await supabase
-    .from('children')
-    .select('*')
-    .order('created_at')
-    .limit(3)
+  const [{ data: expiringItems }, { data: children }] = await Promise.all([
+    supabase
+      .from('ingredients')
+      .select('id, name, expiry_date')
+      .eq('user_id', user.id)
+      .not('expiry_date', 'is', null)
+      .lte('expiry_date', threeDaysLater)
+      .order('expiry_date', { ascending: true })
+      .limit(5),
+    supabase
+      .from('children')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('created_at')
+      .limit(3),
+  ])
 
   // 첫 번째 아이의 추천 레시피 (최대 3개)
   const firstChild = children?.[0]

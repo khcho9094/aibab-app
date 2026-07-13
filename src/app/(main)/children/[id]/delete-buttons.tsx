@@ -37,7 +37,11 @@ export function DeleteAllergyButton({
   return (
     <button
       className="text-gray-400 hover:text-red-500 text-xs ml-1 disabled:opacity-50"
-      onClick={() => startTransition(() => deleteAllergy(allergyId, childId))}
+      onClick={() => {
+        if (!confirm('알레르기를 삭제할게요?'))
+          return
+        startTransition(() => deleteAllergy(allergyId, childId))
+      }}
       disabled={pending}
     >
       ✕

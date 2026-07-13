@@ -19,32 +19,31 @@ export type RecipeWithScore = {
 export async function getRecommendedRecipes(childId: string): Promise<RecipeWithScore[]> {
   const supabase = createClient()
 
-  // 1. 아이 정보 조회
+  // 0. 인증 확인 + user 획득
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return []
+
+  // 1. 아이 정보 조회 (소유권 검증 포함)
   const { data: child } = await supabase
     .from('children')
     .select('birthdate')
     .eq('id', childId)
+    .eq('user_id', user.id)
     .single()
   if (!child) return []
 
   // 2. 아이 월령 계산
   const months = calcAgeMonths(child.birthdate)
 
-  // 3. 알레르기 재료 조회
-  const { data: allergies } = await supabase
-    .from('child_allergies')
-    .select('ingredient_name')
-    .eq('child_id', childId)
-  const allergyNames = (allergies ?? []).map(a => a.ingredient_name.toLowerCase())
+  // 3. 알레르기 + 식재료 병렬 조회
+  const [{ data: allergies }, { data: ingredients }] = await Promise.all([
+    supabase.from('child_allergies').select('ingredient_name').eq('child_id', childId),
+    supabase.from('ingredients').select('canonical_name, name').eq('user_id', user.id),
+  ])
 
-  // 4. 보유 식재료 canonical_name 조회
-  const { data: ingredients } = await supabase
-    .from('ingredients')
-    .select('canonical_name, name')
-    .eq('user_id', (await supabase.auth.getUser()).data.user?.id ?? '')
+  const allergyNames = (allergies ?? []).map(a => a.ingredient_name.toLowerCase())
   const ownedCanonical = new Set(
-    (ingredients ?? [])
-      .map(i => (i.canonical_name ?? i.name).toLowerCase())
+    (ingredients ?? []).map(i => (i.canonical_name ?? i.name).toLowerCase())
   )
 
   // 5. 월령에 맞는 레시피 + 재료 조회
