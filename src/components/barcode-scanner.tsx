@@ -49,7 +49,7 @@ export default function BarcodeScanner({ onScan }: Props) {
 
       // 타입 단언으로 stop 메서드 저장
       scannerRef.current = { stop: () => scanner.clear() }
-    } catch (e) {
+    } catch {
       setError('카메라를 사용할 수 없습니다')
       setScanning(false)
     }
