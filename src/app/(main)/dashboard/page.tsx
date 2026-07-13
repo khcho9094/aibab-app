@@ -125,7 +125,7 @@ export default async function DashboardPage() {
             </Link>
           </div>
           {recommendedRecipes.length > 0 ? (
-            <div className="space-y-2.5">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {recommendedRecipes.map(recipe => {
                 const matchPct = recipe.total_count > 0
                   ? Math.round((recipe.matched_count / recipe.total_count) * 100)
@@ -139,12 +139,13 @@ export default async function DashboardPage() {
                           <p className="text-xs text-gray-400 truncate">{recipe.description}</p>
                         )}
                       </div>
-                      <Badge
-                        variant={matchPct === 100 ? 'default' : 'secondary'}
-                        className={`shrink-0 ml-2 ${matchPct === 100 ? 'bg-orange-500' : ''}`}
-                      >
+                      <span className={`shrink-0 ml-2 text-xs font-medium px-2.5 py-1 rounded-full ${
+                        matchPct === 100
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-orange-100 text-orange-600'
+                      }`}>
                         {matchPct === 100 ? '✓ 재료 완비' : `${matchPct}% 보유`}
-                      </Badge>
+                      </span>
                     </div>
                   </Link>
                 )

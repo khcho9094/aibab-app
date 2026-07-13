@@ -75,7 +75,7 @@ export default async function RecipesPage({
       )}
 
       {recipes.length > 0 && (
-        <div className="space-y-3.5">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {recipes.map(recipe => {
             const matchPct = recipe.total_count > 0
               ? Math.round((recipe.matched_count / recipe.total_count) * 100)
@@ -84,9 +84,7 @@ export default async function RecipesPage({
 
             return (
               <Link key={recipe.id} href={`/recipes/${recipe.id}?child=${selectedId}`}>
-                <div className={`bg-white rounded-2xl p-4 border shadow-sm transition-all hover:border-orange-300 hover:shadow-md ${
-                  hasMissing ? 'opacity-80' : ''
-                }`}>
+                <div style={{ opacity: hasMissing ? 0.8 : 1 }} className="bg-white rounded-xl px-4 py-3 border shadow-sm hover:border-orange-300 hover:shadow-md transition-all">
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1 min-w-0">
                       <p className="font-semibold truncate">{recipe.title}</p>
@@ -94,12 +92,13 @@ export default async function RecipesPage({
                         <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{recipe.description}</p>
                       )}
                     </div>
-                    <Badge
-                      variant={matchPct === 100 ? 'default' : 'secondary'}
-                      className={matchPct === 100 ? 'bg-orange-500 shrink-0' : 'shrink-0'}
-                    >
+                    <span className={`shrink-0 text-xs font-medium px-2.5 py-1 rounded-full ${
+                      matchPct === 100
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-orange-100 text-orange-600'
+                    }`}>
                       {matchPct === 100 ? '✓ 재료 완비' : `${matchPct}% 보유`}
-                    </Badge>
+                    </span>
                   </div>
                   {hasMissing && (
                     <p className="text-xs text-gray-400 mt-2">
