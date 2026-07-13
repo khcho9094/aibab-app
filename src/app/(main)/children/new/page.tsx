@@ -12,7 +12,7 @@ export default function NewChildPage({
   return (
     <div className="max-w-lg mx-auto px-4 py-6">
       <div className="flex items-center gap-3 mb-6">
-        <Link href="/children" className="text-gray-400 hover:text-gray-600 text-xl">
+        <Link href="/children" className="flex items-center justify-center w-10 h-10 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white active:bg-gray-100 transition-colors">
           ←
         </Link>
         <h1 className="text-xl font-bold">아이 추가</h1>

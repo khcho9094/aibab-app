@@ -98,7 +98,7 @@ export default async function RecipesPage({
                       variant={matchPct === 100 ? 'default' : 'secondary'}
                       className={matchPct === 100 ? 'bg-orange-500 shrink-0' : 'shrink-0'}
                     >
-                      {matchPct === 100 ? '보유 재료 완보' : `${matchPct}% 매칭`}
+                      {matchPct === 100 ? '✓ 재료 완비' : `${matchPct}% 보유`}
                     </Badge>
                   </div>
                   {hasMissing && (

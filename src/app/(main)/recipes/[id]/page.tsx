@@ -28,7 +28,7 @@ export default async function RecipeDetailPage({
     <div className="max-w-lg mx-auto px-4 py-6 space-y-5">
       {/* 헤더 */}
       <div className="flex items-center gap-3">
-        <Link href={backUrl} className="text-gray-400 hover:text-gray-600 text-xl">
+        <Link href={backUrl} className="flex items-center justify-center w-10 h-10 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white active:bg-gray-100 transition-colors">
           ←
         </Link>
         <h1 className="text-xl font-bold flex-1">{recipe.title}</h1>

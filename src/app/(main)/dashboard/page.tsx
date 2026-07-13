@@ -46,7 +46,7 @@ export default async function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">🍚 아이밥</h1>
-          <p className="text-sm text-gray-400 mt-0.5">염마들의 도우미 레시피</p>
+        <p className="text-sm text-gray-400 mt-0.5">엄마들의 도우미 레시피</p>
         </div>
         <Link href="/ingredients/new">
           <Button size="sm" className="bg-orange-500 hover:bg-orange-600">
@@ -87,9 +87,14 @@ export default async function DashboardPage() {
               const months = calcAgeMonths(child.birthdate)
               return (
                 <Link key={child.id} href={`/children/${child.id}`}>
-                  <div className="shrink-0 bg-white border rounded-xl px-4 py-3 hover:border-orange-300 transition-colors">
-                    <p className="font-medium text-sm">{child.name}</p>
-                    <p className="text-xs text-gray-400">{formatAgeLabel(months)}</p>
+                  <div className="shrink-0 bg-white border rounded-xl px-4 py-3 hover:border-orange-300 transition-colors flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-sm shrink-0">
+                      {child.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">{child.name}</p>
+                      <p className="text-xs text-gray-400">{formatAgeLabel(months)}</p>
+                    </div>
                   </div>
                 </Link>
               )
@@ -138,7 +143,7 @@ export default async function DashboardPage() {
                         variant={matchPct === 100 ? 'default' : 'secondary'}
                         className={`shrink-0 ml-2 ${matchPct === 100 ? 'bg-orange-500' : ''}`}
                       >
-                        {matchPct === 100 ? '완보' : `${matchPct}%`}
+                        {matchPct === 100 ? '✓ 재료 완비' : `${matchPct}% 보유`}
                       </Badge>
                     </div>
                   </Link>

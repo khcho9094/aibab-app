@@ -62,10 +62,11 @@ export default async function IngredientsPage() {
       </div>
 
       {(!ingredients || ingredients.length === 0) ? (
-        <div className="text-center py-16 text-gray-400">
+        <div className="bg-orange-50 rounded-2xl p-8 text-center mt-8">
           <p className="text-5xl mb-3">🥕</p>
-          <p className="text-sm mb-4">식재료를 추가해보세요</p>
-          <Button asChild className="bg-orange-500 hover:bg-orange-600">
+          <p className="font-medium text-gray-700 mb-1">식재료를 등록해보세요</p>
+          <p className="text-sm text-gray-500 mb-4">보유한 재료로 맞는 레시피를 추천해드려요</p>
+          <Button asChild className="bg-orange-500 hover:bg-orange-600 rounded-full px-6">
             <Link href="/ingredients/new">첫 번째 식재료 추가하기</Link>
           </Button>
         </div>

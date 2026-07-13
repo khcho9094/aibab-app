@@ -43,7 +43,7 @@ export default async function ChildDetailPage({
       {/* 헤더 */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link href="/children" className="text-gray-400 hover:text-gray-600 text-xl">
+          <Link href="/children" className="flex items-center justify-center w-10 h-10 rounded-full text-gray-400 hover:text-gray-600 hover:bg-white active:bg-gray-100 transition-colors">
             ←
           </Link>
           <h1 className="text-xl font-bold">{child.name}</h1>
@@ -77,7 +77,10 @@ export default async function ChildDetailPage({
             />
           </div>
           {searchParams.error && (
-            <p className="text-sm text-red-500">{searchParams.error}</p>
+            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded-lg">{searchParams.error}</p>
+          )}
+          {(searchParams as { message?: string }).message && (
+            <p className="text-sm text-green-600 bg-green-50 px-3 py-2 rounded-lg">{(searchParams as { message?: string }).message}</p>
           )}
           <Button type="submit" size="sm" className="bg-orange-500 hover:bg-orange-600">
             저장
@@ -114,7 +117,7 @@ export default async function ChildDetailPage({
               name="severity"
               className="h-10 rounded-md border border-input bg-background px-3 text-sm"
             >
-              <option value="mild">열등(mild)</option>
+              <option value="mild">경미(mild)</option>
               <option value="severe">심함(severe)</option>
             </select>
           </div>

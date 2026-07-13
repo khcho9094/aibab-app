@@ -31,7 +31,9 @@ export default async function ChildrenPage() {
               <Link key={child.id} href={`/children/${child.id}`}>
                 <div className="bg-white rounded-xl p-4 border border-gray-100 hover:border-orange-300 transition-colors">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl">👶</span>
+                    <div className="w-11 h-11 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-base shrink-0">
+                      {child.name.charAt(0)}
+                    </div>
                     <div>
                       <p className="font-semibold">{child.name}</p>
                       <p className="text-sm text-gray-500">
@@ -46,11 +48,12 @@ export default async function ChildrenPage() {
           })}
         </div>
       ) : (
-        <div className="text-center py-16 text-gray-400">
+        <div className="bg-orange-50 rounded-2xl p-8 text-center mt-8">
           <p className="text-5xl mb-3">👶</p>
-          <p className="text-sm mb-4">아이 프로필을 추가해보세요</p>
-          <Button asChild className="bg-orange-500 hover:bg-orange-600">
-            <Link href="/children/new">첫 번째 아이 추가하기</Link>
+          <p className="font-medium text-gray-700 mb-1">아이 프로필을 등록해보세요</p>
+          <p className="text-sm text-gray-500 mb-4">아이 월령에 맞는 레시피를 추천해드려요</p>
+          <Button asChild className="bg-orange-500 hover:bg-orange-600 rounded-full px-6">
+            <Link href="/children/new">첫 번째 아이 등록하기</Link>
           </Button>
         </div>
       )}

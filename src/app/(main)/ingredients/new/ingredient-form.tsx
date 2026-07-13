@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { createIngredient } from '@/lib/actions/ingredients'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import BarcodeScanner from '@/components/barcode-scanner'
+import { SubmitButton } from '@/components/submit-button'
 
 const CATEGORIES = ['채소', '과일', '육류', '어류', '유제품', '곡물', '기타']
 
@@ -63,11 +63,11 @@ export default function IngredientForm({ error }: { error?: string }) {
         </select>
       </div>
 
-      {error && <p className="text-sm text-red-500">{error}</p>}
+      {error && <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded-lg">{error}</p>}
 
-      <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
+      <SubmitButton className="w-full bg-orange-500 hover:bg-orange-600" pendingText="저장 중...">
         저장하기
-      </Button>
+      </SubmitButton>
     </form>
   )
 }
