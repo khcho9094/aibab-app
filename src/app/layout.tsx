@@ -17,6 +17,16 @@ export const metadata: Metadata = {
   title: "아이밥 - 이유식 레시피 추천",
   description:
     "냉장고 식재료로 아이 월령에 맞는 이유식·유아식 레시피를 추천해드려요",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "아이밥",
+  },
+  formatDetection: { telephone: false },
+  icons: {
+    apple: "/icon-192.png",
+  },
 };
 
 export default function RootLayout({
