@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
-import { Badge } from '@/components/ui/badge'
 import { getRecommendedRecipes } from '@/lib/recipes/recommend'
 import { formatAgeLabel, calcAgeMonths } from '@/lib/utils/age'
 
