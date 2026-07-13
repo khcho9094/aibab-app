@@ -24,12 +24,12 @@ export default async function ChildrenPage() {
       </div>
 
       {children && children.length > 0 ? (
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           {children.map((child) => {
             const months = calcAgeMonths(child.birthdate)
             return (
               <Link key={child.id} href={`/children/${child.id}`}>
-                <div className="bg-white rounded-xl p-4 border border-gray-100 hover:border-orange-300 transition-colors">
+                  <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:border-orange-300 hover:shadow-md transition-all">
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-base shrink-0">
                       {child.name.charAt(0)}

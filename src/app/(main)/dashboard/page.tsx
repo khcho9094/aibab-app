@@ -125,14 +125,14 @@ export default async function DashboardPage() {
             </Link>
           </div>
           {recommendedRecipes.length > 0 ? (
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {recommendedRecipes.map(recipe => {
                 const matchPct = recipe.total_count > 0
                   ? Math.round((recipe.matched_count / recipe.total_count) * 100)
                   : 100
                 return (
                   <Link key={recipe.id} href={`/recipes/${recipe.id}?child=${firstChild.id}`}>
-                    <div className="bg-white border rounded-xl px-4 py-3 hover:border-orange-300 transition-colors flex items-center justify-between">
+                    <div className="bg-white border rounded-2xl px-4 py-3 hover:border-orange-300 hover:shadow-sm transition-all flex items-center justify-between">
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-sm truncate">{recipe.title}</p>
                         {recipe.description && (

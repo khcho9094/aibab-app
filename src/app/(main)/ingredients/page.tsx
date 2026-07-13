@@ -35,7 +35,7 @@ export default async function IngredientsPage() {
   function IngredientRow({ item }: { item: Ingredient }) {
     const status = getExpiryStatus(item.expiry_date)
     return (
-      <div className="flex items-center gap-3 py-3 border-b last:border-0">
+      <div className="flex items-center gap-3 py-3.5 border-b last:border-0">
         <FavoriteButton id={item.id} isFavorite={item.is_favorite} />
         <div className="flex-1 min-w-0">
           <p className="font-medium truncate">{item.name}</p>
@@ -71,7 +71,7 @@ export default async function IngredientsPage() {
           </Button>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border divide-y-0">
+        <div className="bg-white rounded-2xl border shadow-sm divide-y-0">
           {favorites.length > 0 && (
             <div className="px-4">
               <p className="text-xs text-gray-400 pt-3 pb-1 font-medium">⭐ 즐겨찾기</p>

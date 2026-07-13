@@ -75,7 +75,7 @@ export default async function RecipesPage({
       )}
 
       {recipes.length > 0 && (
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           {recipes.map(recipe => {
             const matchPct = recipe.total_count > 0
               ? Math.round((recipe.matched_count / recipe.total_count) * 100)
@@ -84,7 +84,7 @@ export default async function RecipesPage({
 
             return (
               <Link key={recipe.id} href={`/recipes/${recipe.id}?child=${selectedId}`}>
-                <div className={`bg-white rounded-xl p-4 border transition-colors hover:border-orange-300 ${
+                <div className={`bg-white rounded-2xl p-4 border shadow-sm transition-all hover:border-orange-300 hover:shadow-md ${
                   hasMissing ? 'opacity-80' : ''
                 }`}>
                   <div className="flex items-start justify-between gap-2">
